@@ -1,1 +1,44 @@
-{% extends 'base.html' %}{% block title %}Official Login{% endblock %}{% block content %}<div class="auth-wrap"><div class="auth-card"><span class="eyebrow">AUTHORIZED PERSONNEL</span><h1>Doctor / CMO Login</h1><p>Use your government/GramCare portal credentials.</p><form method="post"><label>Email<input type="email" name="email" required></label><label>Password<input type="password" name="password" required></label><button class="btn primary full">Sign in securely</button></form><div class="demo-box"><b>Demo accounts</b><p>PHC Doctor: asha.verma@gramcare.gov.in / doctor123</p><p>Second PHC: rajesh.kumar@gramcare.gov.in / doctor123</p><p>CMO: cmo@gramcare.gov.in / cmo123</p></div><a class="text-link" href="{{url_for('patient_login')}}">Patient login →</a></div></div>{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}Official Staff Portal Login - GramCare{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="card border-0 shadow-lg">
+            <div class="card-header bg-gov-slate text-white text-center py-4 border-0">
+                <div class="mb-2">
+                    <i class="fas fa-user-shield fa-3x text-warning"></i>
+                </div>
+                <h4 class="fw-bold mb-0 text-white">Staff Authorization</h4>
+                <small class="text-light opacity-75">Medical Officer & Official Portal Access</small>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-muted text-uppercase">Officer Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                            <input type="text" name="username" class="form-control border-start-0" placeholder="Enter Official User ID" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small text-muted text-uppercase">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
+                            <input type="password" name="password" class="form-control border-start-0" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gov-warning w-100 py-2 shadow-sm fw-bold">
+                        <i class="fas fa-sign-in-alt me-2"></i> Authorize Login
+                    </button>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-light py-3 border-top">
+                <span class="text-muted small">Are you a patient?</span>
+                <a href="{{ url_for('patient_login') }}" class="fw-bold text-primary ms-1">Access ABHA Patient Portal</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
