@@ -1,1 +1,66 @@
-{% extends 'base.html' %}{% block title %}Patient Registry{% endblock %}{% block content %}<div class="page-head"><div><span class="eyebrow">{{'DISTRICT REGISTRY' if current_role=='cmo' else 'PHC REGISTRY'}}</span><h1>Patient records</h1><p>{{patients|length}} records available in your permitted region.</p></div>{% if current_role=='doctor' %}<a class="btn primary" href="{{url_for('new_patient')}}">+ Register patient</a>{% endif %}</div><div class="panel"><table><thead><tr><th>Health ID</th><th>Patient</th><th>Age/Sex</th><th>Village</th><th>PHC</th><th>Action</th></tr></thead><tbody>{% for p in patients %}<tr><td><b>{{p.code}}</b></td><td>{{p.name}}<small>{{p.phone}}</small></td><td>{{p.age or '—'}} / {{p.sex or '—'}}</td><td>{{p.village or '—'}}</td><td>{{p.phc_name or '—'}}</td><td><a class="mini-btn" href="{{url_for('patient_detail',patient_id=p.id)}}">Open record</a></td></tr>{% else %}<tr><td colspan="6">No records.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}Patient Directory - GramCare Portal{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <div>
+                <h3 class="fw-bold mb-1">Registered Patient Directory</h3>
+                <p class="text-muted small mb-0">National Rural Health Mission Patient Database</p>
+            </div>
+            <a href="{{ url_for('patient_new') }}" class="btn btn-warning text-dark fw-bold">
+                <i class="fas fa-user-plus me-1"></i> + Register New Patient
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Health ID</th>
+                        <th>Full Name</th>
+                        <th>Age / Gender</th>
+                        <th>Village</th>
+                        <th>Contact</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge bg-light text-dark border font-monospace">GC-26-DBC945</span></td>
+                        <td class="fw-bold text-dark">Kishan Kapoor</td>
+                        <td>45 / Male</td>
+                        <td>Lakhimpur</td>
+                        <td>9876543210</td>
+                        <td class="text-end">
+                            <a href="{{ url_for('patient_detail', patient_id='GC-26-DBC945') }}" class="btn btn-primary btn-sm">View Medical File</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge bg-light text-dark border font-monospace">GC-26-825119</span></td>
+                        <td class="fw-bold text-dark">Amitesh Rai</td>
+                        <td>32 / Male</td>
+                        <td>Lakhimpur</td>
+                        <td>9876543211</td>
+                        <td class="text-end">
+                            <a href="{{ url_for('patient_detail', patient_id='GC-26-825119') }}" class="btn btn-primary btn-sm">View Medical File</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge bg-light text-dark border font-monospace">GC-26-A1B2C3</span></td>
+                        <td class="fw-bold text-dark">Sita Devi</td>
+                        <td>28 / Female</td>
+                        <td>Rampur</td>
+                        <td>9876543212</td>
+                        <td class="text-end">
+                            <a href="{{ url_for('patient_detail', patient_id='GC-26-A1B2C3') }}" class="btn btn-primary btn-sm">View Medical File</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
