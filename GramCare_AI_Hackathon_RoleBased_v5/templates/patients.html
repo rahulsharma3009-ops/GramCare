@@ -10,9 +10,6 @@
                 <h3 class="fw-bold mb-1">Registered Patient Directory</h3>
                 <p class="text-muted small mb-0">National Rural Health Mission Patient Database</p>
             </div>
-            <a href="{{ url_for('patient_new') }}" class="btn btn-warning text-dark fw-bold">
-                <i class="fas fa-user-plus me-1"></i> + Register New Patient
-            </a>
         </div>
 
         <div class="table-responsive">
@@ -24,7 +21,6 @@
                         <th>Age / Gender</th>
                         <th>Village</th>
                         <th>Contact</th>
-                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +30,6 @@
                         <td>45 / Male</td>
                         <td>Lakhimpur</td>
                         <td>9876543210</td>
-                        <td class="text-end">
-                            <a href="{{ url_for('patient_detail', patient_id='GC-26-DBC945') }}" class="btn btn-primary btn-sm">View Medical File</a>
-                        </td>
                     </tr>
                     <tr>
                         <td><span class="badge bg-light text-dark border font-monospace">GC-26-825119</span></td>
@@ -44,9 +37,6 @@
                         <td>32 / Male</td>
                         <td>Lakhimpur</td>
                         <td>9876543211</td>
-                        <td class="text-end">
-                            <a href="{{ url_for('patient_detail', patient_id='GC-26-825119') }}" class="btn btn-primary btn-sm">View Medical File</a>
-                        </td>
                     </tr>
                     <tr>
                         <td><span class="badge bg-light text-dark border font-monospace">GC-26-A1B2C3</span></td>
@@ -54,9 +44,6 @@
                         <td>28 / Female</td>
                         <td>Rampur</td>
                         <td>9876543212</td>
-                        <td class="text-end">
-                            <a href="{{ url_for('patient_detail', patient_id='GC-26-A1B2C3') }}" class="btn btn-primary btn-sm">View Medical File</a>
-                        </td>
                     </tr>
                 </tbody>
             </table>
