@@ -5,82 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GramCare - National Rural Health Portal{% endblock %}</title>
     
-    <!-- Bootstrap 5 CSS (CDNs) -->
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Govt Theme CSS -->
+    <!-- Custom Theme CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'hi,en',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-        function triggerLanguageChange(langCode) {
-            var selectObj = document.querySelector(".goog-te-combo");
-            if (selectObj) {
-                selectObj.value = langCode;
-                selectObj.dispatchEvent(new Event('change'));
-            }
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
-<body class="d-flex flex-column min-vh-100 bg-light">
+<body class="d-flex flex-column min-vh-100">
 
-    <!-- Top Govt Header & Language Switcher -->
-    <div class="gov-top-bar text-white py-1 px-3 d-flex justify-content-between align-items-center">
+    <!-- Top Govt Emergency & Reliable Language Switcher Bar -->
+    <div class="gov-top-bar text-white py-2 px-4 d-flex justify-content-between align-items-center flex-wrap">
         <div class="top-bar-left small">
-            <span class="me-3"><strong class="text-warning"><i class="fas fa-flag-usa me-1" style="display:none;"></i>भारत सरकार | Govt of India</strong></span>
-            <span><i class="fas fa-phone-alt me-1"></i> Health Helpline: <strong>104 / 1075</strong></span>
+            <span class="me-3 fw-bold text-warning"><i class="fas fa-flag-usa me-1" style="display:none;"></i>भारत सरकार | Govt of India</span>
+            <span><i class="fas fa-phone-alt me-1"></i> Health Helpline: <strong class="text-white">104 / 1075</strong></span>
         </div>
+        
+        <!-- WORKING GOOGLE TRANSLATE SELECTOR -->
         <div class="top-bar-right d-flex align-items-center gap-2">
-            <div class="btn-group btn-group-sm" role="group">
-                <button type="button" class="btn btn-outline-light btn-sm px-2 py-0 fw-bold" onclick="triggerLanguageChange('en')">English</button>
-                <button type="button" class="btn btn-warning btn-sm px-2 py-0 fw-bold text-dark" onclick="triggerLanguageChange('hi')">हिंदी (Hindi)</button>
-            </div>
-            <div id="google_translate_element" style="display:none;"></div>
+            <span class="small text-light me-1"><i class="fas fa-language me-1"></i> Language:</span>
+            <div id="google_translate_element"></div>
         </div>
     </div>
 
-    <!-- Official Tricolor Accent Strip -->
-    <div class="tricolor-strip">
-        <div class="saffron-band"></div>
-        <div class="white-band"></div>
-        <div class="green-band"></div>
-    </div>
+    <!-- Official Tricolor Accent Line -->
+    <div style="height: 4px; background: linear-gradient(90deg, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%);"></div>
 
     <!-- Main Header Banner -->
-    <header class="gov-header py-3 px-4 bg-white border-bottom shadow-sm">
+    <header class="bg-white py-3 px-4 border-bottom shadow-sm">
         <div class="container d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-                <div class="gov-emblem me-3 text-center">
-                    <i class="fas fa-landmark text-navy fa-2x"></i>
-                    <div class="ashoka-text">सत्यमेव जयते</div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-center">
+                    <i class="fas fa-landmark text-success fa-2x"></i>
+                    <div style="font-size: 0.6rem; font-weight: bold; color: #555;">सत्यमेव जयते</div>
                 </div>
                 <div>
-                    <h1 class="h3 mb-0 fw-bold text-navy border-0 pb-0">ग्रामकेयर / GramCare Portal</h1>
-                    <p class="mb-0 text-muted small fw-semibold">National Digital Health Mission for Rural Healthcare</p>
+                    <h1 class="h3 mb-0 fw-bold border-0 pb-0" style="color: #1C2D42;">ग्रामकेयर / GramCare Portal</h1>
+                    <p class="mb-0 text-muted small">National Digital Health Mission for Rural Healthcare</p>
                 </div>
             </div>
-            <div class="d-none d-md-flex gap-2">
-                <span class="badge bg-warning text-dark border border-dark p-2"><i class="fas fa-heartbeat me-1"></i> Ayushman Bharat</span>
-                <span class="badge bg-success p-2"><i class="fas fa-shield-alt me-1"></i> Govt Portal</span>
+            
+            <!-- Helpline Widgets like UP.gov.in sample -->
+            <div class="d-none d-md-flex align-items-center gap-3">
+                <div class="helpline-box-orange d-flex align-items-center gap-2">
+                    <i class="fas fa-headset fa-2x text-danger"></i>
+                    <div>
+                        <div class="small fw-bold text-uppercase text-danger">Medical Helpline</div>
+                        <div class="h5 mb-0 fw-bold text-dark">1076</div>
+                    </div>
+                </div>
+                <div class="helpline-box-blue d-flex align-items-center gap-2">
+                    <i class="fas fa-ambulance fa-2x text-primary"></i>
+                    <div>
+                        <div class="small fw-bold text-uppercase text-primary">Emergency</div>
+                        <div class="h5 mb-0 fw-bold text-dark">112</div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Navbar: Hides protected links when logged out -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gov-navy sticky-top shadow-sm">
+    <!-- Navigation Bar (Slate Green Style like Sample Image) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gov-slate sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold text-warning" href="{{ url_for('index') }}">
-                <i class="fas fa-hospital-symbol me-2"></i>GramCare Home
+                <i class="fas fa-home me-1"></i> Home
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#govNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -88,7 +77,6 @@
             
             <div class="collapse navbar-collapse" id="govNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- ONLY SHOW INTERNAL LINKS IF LOGGED IN -->
                     {% if session.get('user_id') or session.get('role') %}
                         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('care_hub') }}"><i class="fas fa-th-large me-1 text-info"></i> Care Hub</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('patients') }}"><i class="fas fa-user-injured me-1 text-warning"></i> Patients</a></li>
@@ -105,7 +93,7 @@
                         </span>
                         <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm text-white fw-bold"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-warning text-dark btn-sm fw-bold"><i class="fas fa-lock me-1"></i> Official Portal Login</a>
+                        <a href="{{ url_for('login') }}" class="btn btn-warning text-dark btn-sm fw-bold"><i class="fas fa-lock me-1"></i> Official Login</a>
                         <a href="{{ url_for('patient_login') }}" class="btn btn-outline-light btn-sm fw-bold"><i class="fas fa-id-card me-1"></i> ABHA Login</a>
                     {% endif %}
                 </div>
@@ -113,12 +101,12 @@
         </div>
     </nav>
 
-    <!-- Main Centered Container -->
+    <!-- Main Content Area -->
     <main class="container py-4 flex-grow-1">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show border-start border-5 shadow-sm" role="alert">
+                    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show shadow-sm" role="alert">
                         <i class="fas fa-info-circle me-2"></i> {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
@@ -130,21 +118,35 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-auto bg-dark text-white pt-4 pb-2 border-top border-4 border-warning">
+    <footer class="mt-auto bg-dark text-white pt-4 pb-3 border-top border-4 border-warning">
         <div class="container px-4">
-            <div class="row gy-3">
+            <div class="row gy-3 align-items-center">
                 <div class="col-md-6">
-                    <h5 class="text-warning fw-bold"><i class="fas fa-clinic-medical me-2"></i>GramCare AI Health Portal</h5>
-                    <p class="small text-light mb-0">National Rural Health & Teleconsultation Network under Digital India Movement.</p>
+                    <h5 class="text-warning fw-bold mb-1"><i class="fas fa-clinic-medical me-2"></i>GramCare Rural Health Network</h5>
+                    <p class="small text-secondary mb-0">Designed in accordance with Indian Government Digital Accessibility Standards.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="small text-muted mb-0">&copy; 2026 Government of India / GramCare Initiative.</p>
+                    <p class="small text-secondary mb-0">&copy; 2026 Government of India / GramCare Initiative.</p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Bootstrap 5 JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Google Translate Official Script (FIXED) -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,en,bn,te,ta,mr,gu,kn,pa',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
