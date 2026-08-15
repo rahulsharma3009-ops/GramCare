@@ -1,113 +1,86 @@
-/* Official UP-Gov Inspired Palette */
 :root {
-    --up-gov-bg: #F5F1EA;          /* Light warm background like sample image */
-    --up-gov-header: #2F3E35;      /* Dark slate green top bar */
-    --up-gov-accent: #E05A47;      /* Saffron/Orange accent line */
-    --up-gov-navy: #1C2D42;        /* Deep Navy text */
-    --up-gov-card-bg: #FFFFFF;     /* Pure white cards */
-    --up-gov-helpline-orange: #F37023;
+    --up-gov-slate: #2F3E35;
+    --up-gov-bg: #F4F6F8;
+    --up-gov-navy: #1C2D42;
+    --up-gov-accent: #E05A47;
 }
 
 body {
-    background-color: var(--up-gov-bg) !important;
+    background-color: var(--up-gov-bg);
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: #2D3748;
+    color: #333333;
 }
 
-/* Light & Clean Container Spacing */
-main.container, main.container-fluid {
-    max-width: 1240px;
-    padding-top: 2rem !important;
-    padding-bottom: 3rem !important;
+/* Tricolor Top Bar */
+.tricolor-strip {
+    display: flex;
+    height: 4px;
+    width: 100%;
 }
 
-/* Top Dark Slate Nav Bar (Matches sample website header) */
 .gov-top-bar {
     background-color: #1E2521 !important;
     font-size: 0.85rem;
 }
 
 .bg-gov-slate {
-    background-color: var(--up-gov-header) !important;
+    background-color: var(--up-gov-slate) !important;
 }
 
-/* Heading with Accent Underline like UP.gov.in */
-h1, h2, h3, .heading-underlined {
+/* Page Heading Style */
+h1, h2, h3 {
     color: var(--up-gov-navy);
-    font-weight: 800;
-    position: relative;
-    padding-bottom: 8px;
-    margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
-h1::after, h2::after, h3::after, .heading-underlined::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: var(--up-gov-accent);
-    border-radius: 2px;
-}
-
-/* Clean White Card Styling like UP Portal */
-.card, .gov-card {
-    background-color: var(--up-gov-card-bg) !important;
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 12px !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
-    transition: all 0.2s ease-in-out;
-}
-
-.card:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Helpline Badges (Right side like sample image) */
-.helpline-box-orange {
-    background: #FFF5EF;
-    border: 1px solid #FCD3C1;
+/* Card Styling for De-congesting Content */
+.card {
+    border: 1px solid #E2E8F0;
     border-radius: 10px;
-    padding: 12px 18px;
-}
-.helpline-box-blue {
-    background: #EFF6FF;
-    border: 1px solid #BFDBFE;
-    border-radius: 10px;
-    padding: 12px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background-color: #FFFFFF;
+    margin-bottom: 1.25rem;
 }
 
-/* De-congested Table Design */
-table {
-    width: 100% !important;
-    background: #FFFFFF !important;
-    border-radius: 8px !important;
-    overflow: hidden !important;
-    border-collapse: collapse !important;
-    margin-top: 1rem !important;
-    border: 1px solid #E2E8F0 !important;
+.card-header {
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #F1F5F9;
+    font-weight: 700;
 }
 
-table th {
-    background-color: var(--up-gov-header) !important;
-    color: #FFFFFF !important;
-    padding: 14px 18px !important;
+/* Table Styling */
+table.table {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+table.table th {
+    background-color: var(--up-gov-slate);
+    color: #FFFFFF;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    padding: 12px;
 }
 
-table td {
-    padding: 14px 18px !important;
-    border-bottom: 1px solid #F1F5F9 !important;
+table.table td {
+    padding: 12px;
+    vertical-align: middle;
 }
 
-table tr:hover {
-    background-color: #F8FAFC !important;
+/* Form Inputs */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid #CBD5E1;
+    padding: 8px 12px;
 }
 
-/* Translation Widget Fix */
+.form-control:focus, .form-select:focus {
+    border-color: var(--up-gov-slate);
+    box-shadow: 0 0 0 3px rgba(47, 62, 53, 0.15);
+}
+
+/* Fix Google Translate Display */
 .goog-te-banner-frame { display: none !important; }
 body { top: 0px !important; }
