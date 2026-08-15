@@ -1,86 +1,199 @@
+/* Official Government Portal Theme (Modern & De-congested) */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 :root {
-    --up-gov-slate: #2F3E35;
-    --up-gov-bg: #F4F6F8;
-    --up-gov-navy: #1C2D42;
-    --up-gov-accent: #E05A47;
+    --gov-slate: #1E2D24;
+    --gov-dark-slate: #141E18;
+    --gov-accent-orange: #FF7722;
+    --gov-green: #138808;
+    --gov-gold: #FFB703;
+    --gov-bg: #F4F6F9;
+    --gov-card-border: #E2E8F0;
+    --gov-navy: #0F172A;
 }
 
 body {
-    background-color: var(--up-gov-bg);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: #333333;
+    background-color: var(--gov-bg) !important;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+    color: #334155;
+    overflow-x: hidden;
 }
 
-/* Tricolor Top Bar */
+/* Tricolor Top Accent Strip */
 .tricolor-strip {
     display: flex;
-    height: 4px;
+    height: 5px;
     width: 100%;
 }
+.tricolor-strip div:nth-child(1) { background: #FF9933; flex: 1; }
+.tricolor-strip div:nth-child(2) { background: #FFFFFF; flex: 1; }
+.tricolor-strip div:nth-child(3) { background: #138808; flex: 1; }
 
+/* Top Mini Header Bar */
 .gov-top-bar {
-    background-color: #1E2521 !important;
-    font-size: 0.85rem;
+    background-color: var(--gov-dark-slate) !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
 }
 
+/* Main Brand Header */
+header.main-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.brand-title {
+    color: var(--gov-navy);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Interactive Helpline Badges */
+.helpline-badge {
+    background: #FFF7ED;
+    border: 1px solid #FFEDD5;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.helpline-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 119, 34, 0.15);
+}
+
+/* Primary Navigation Bar */
 .bg-gov-slate {
-    background-color: var(--up-gov-slate) !important;
+    background: linear-gradient(180deg, var(--gov-slate) 0%, var(--gov-dark-slate) 100%) !important;
 }
 
-/* Page Heading Style */
-h1, h2, h3 {
-    color: var(--up-gov-navy);
-    font-weight: 700;
+.navbar .nav-link {
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.6rem 1rem !important;
+    border-radius: 6px;
+    transition: all 0.2s ease;
 }
 
-/* Card Styling for De-congesting Content */
-.card {
+.navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gov-gold) !important;
+}
+
+/* Modern Card Styling with Glass & Soft Shadows */
+.card, .gov-card {
+    border: 1px solid var(--gov-card-border) !important;
+    border-radius: 14px !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+    transition: transform 0.25 ease, box-shadow 0.25s ease !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Interactive Stat Counter Cards */
+.stat-card {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 1.25rem;
     border: 1px solid #E2E8F0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    background-color: #FFFFFF;
-    margin-bottom: 1.25rem;
-}
-
-.card-header {
-    background-color: #FFFFFF;
-    border-bottom: 2px solid #F1F5F9;
-    font-weight: 700;
-}
-
-/* Table Styling */
-table.table {
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
+    position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+}
+.stat-card-blue::before { background: #3B82F6; }
+.stat-card-green::before { background: #10B981; }
+.stat-card-amber::before { background: #F59E0B; }
+.stat-card-red::before { background: #EF4444; }
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+
+/* Government Interactive Tables */
+.table-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+}
+
+table.table {
+    margin-bottom: 0 !important;
     background: #FFFFFF;
 }
 
-table.table th {
-    background-color: var(--up-gov-slate);
+table.table thead th {
+    background: var(--gov-slate) !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border: none;
+}
+
+table.table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 0.92rem;
+}
+
+table.table-hover tbody tr:hover {
+    background-color: #F8FAFC !important;
+}
+
+/* Buttons & Inputs */
+.btn-gov-primary {
+    background-color: var(--gov-slate);
     color: #FFFFFF;
     font-weight: 600;
-    font-size: 0.88rem;
-    padding: 12px;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: all 0.2s ease;
+}
+.btn-gov-primary:hover {
+    background-color: var(--gov-dark-slate);
+    color: var(--gov-gold);
 }
 
-table.table td {
-    padding: 12px;
-    vertical-align: middle;
+.btn-gov-warning {
+    background-color: var(--gov-accent-orange);
+    color: #FFFFFF;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(255, 119, 34, 0.25);
+    transition: all 0.2s ease;
+}
+.btn-gov-warning:hover {
+    background-color: #E66000;
+    color: #FFFFFF;
+    transform: translateY(-1px);
 }
 
-/* Form Inputs */
-.form-control, .form-select {
-    border-radius: 6px;
-    border: 1px solid #CBD5E1;
-    padding: 8px 12px;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: var(--up-gov-slate);
-    box-shadow: 0 0 0 3px rgba(47, 62, 53, 0.15);
-}
-
-/* Fix Google Translate Display */
+/* Fix Google Translate Box Display */
 .goog-te-banner-frame { display: none !important; }
 body { top: 0px !important; }
+.goog-te-gadget-simple {
+    background-color: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 6px !important;
+    padding: 2px 8px !important;
+    font-size: 0.8rem !important;
+}
+.goog-te-gadget-simple span {
+    color: #FFFFFF !important;
+}
