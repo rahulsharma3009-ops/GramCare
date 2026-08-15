@@ -1,1 +1,129 @@
-{% extends 'base.html' %}{% block title %}PHC Doctor Dashboard{% endblock %}{% block content %}<div class="page-head"><div><span class="eyebrow">PRIMARY HEALTH CENTRE</span><h1>{{doctor.phc_name}}</h1><p>{{doctor.name}} · {{doctor.designation}} · {{doctor.phc_code}}</p></div><a class="btn primary" href="{{url_for('new_patient')}}">+ Register patient</a></div><div class="stat-grid"><div class="stat"><span>Patients in PHC</span><b>{{patients|length}}</b></div><div class="stat"><span>Today's visits</span><b>{{visits}}</b></div><div class="stat"><span>Referrals</span><b>{{refs}}</b></div><div class="stat"><span>Currently admitted</span><b>{{admitted}}</b></div></div>{% if notices %}<div class="notice-pop"><div><b>CMO Announcement</b><span>Official notice for your PHC</span></div><button onclick="this.parentElement.remove()">×</button>{% for n in notices %}<article><strong>{{n.title}}</strong><p>{{n.message}}</p><small>{{n.priority}} · {{n.created_at}}</small></article>{% endfor %}</div>{% endif %}<div class="two-col"><section class="panel"><div class="panel-head"><h2>My PHC Patient Queue</h2><a href="{{url_for('patients')}}">View all</a></div><table><thead><tr><th>Health ID</th><th>Patient</th><th>Village</th><th>Action</th></tr></thead><tbody>{% for p in patients[:10] %}<tr><td><b>{{p.code}}</b></td><td>{{p.name}}</td><td>{{p.village}}</td><td><a class="mini-btn" href="{{url_for('patient_detail',patient_id=p.id)}}">Open</a></td></tr>{% else %}<tr><td colspan="4">No patients yet.</td></tr>{% endfor %}</tbody></table></section><section class="panel"><div class="panel-head"><h2>Clinical workflow</h2></div><div class="workflow"><span>Consult</span><i>→</i><span>AI assessment</span><i>→</i><span>Notes</span><i>→</i><span>Referral / Follow-up</span></div><div class="quick"><a href="{{url_for('assessments')}}">AI assessment queue</a><a href="{{url_for('referrals')}}">Referral & telemedicine</a><a href="{{url_for('consultations')}}">District video consults</a></div></section></div>{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}Doctor Dashboard - GramCare Portal{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    
+    <!-- Left Profile & Announcement Widget Column (Like sample site left side) -->
+    <div class="col-lg-4 col-md-5">
+        <div class="card border-0 shadow-sm text-center">
+            <div class="card-body">
+                <div class="mb-3">
+                    <i class="fas fa-user-md fa-4x text-success bg-light p-3 rounded-circle border"></i>
+                </div>
+                <h4 class="fw-bold mb-1 text-navy" style="border:none;">Dr. Asha Verma</h4>
+                <p class="text-muted small mb-2"><i class="fas fa-id-badge me-1"></i> Medical Officer &bull; PHC-RAMPUR</p>
+                <span class="badge bg-success px-3 py-2"><i class="fas fa-check-circle me-1"></i> Active Duty</span>
+                
+                <hr class="my-3">
+
+                <a href="{{ url_for('patient_new') }}" class="btn btn-warning text-dark fw-bold w-100 py-2 shadow-sm">
+                    <i class="fas fa-user-plus me-2"></i>+ Register New Patient
+                </a>
+            </div>
+        </div>
+
+        <!-- CMO Announcement Widget -->
+        <div class="card border-0 shadow-sm border-start border-4 border-warning">
+            <div class="card-body">
+                <h5 class="fw-bold text-dark mb-2" style="border:none;"><i class="fas fa-bullhorn text-warning me-2"></i>CMO Announcement</h5>
+                <h6 class="fw-bold text-primary mb-1">Free Polio Vaccination Drive</h6>
+                <p class="small text-muted mb-2">Notice for all Rampur PHC staff regarding vaccine collection from CMO office for the upcoming drive on 18/08/2026.</p>
+                <span class="badge bg-danger">Urgent</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Main Dashboard Column -->
+    <div class="col-lg-8 col-md-7">
+        
+        <!-- Header Title Banner -->
+        <div class="card border-0 shadow-sm mb-4 bg-white">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">PRIMARY HEALTH CENTRE</span>
+                <h2 class="h3 fw-bold mb-1">Rampur Primary Health Centre</h2>
+                <p class="text-muted small mb-0">District Healthcare & Telemedicine Center</p>
+            </div>
+        </div>
+
+        <!-- Stat Counter Grid -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-sm-3">
+                <div class="card border-0 text-center shadow-sm py-2 bg-white">
+                    <h2 class="fw-bold text-primary mb-0" style="border:none;">3</h2>
+                    <span class="small text-muted fw-semibold">PHC Patients</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="card border-0 text-center shadow-sm py-2 bg-white">
+                    <h2 class="fw-bold text-success mb-0" style="border:none;">2</h2>
+                    <span class="small text-muted fw-semibold">Today's Visits</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="card border-0 text-center shadow-sm py-2 bg-white">
+                    <h2 class="fw-bold text-warning mb-0" style="border:none;">2</h2>
+                    <span class="small text-muted fw-semibold">Referrals</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="card border-0 text-center shadow-sm py-2 bg-white">
+                    <h2 class="fw-bold text-danger mb-0" style="border:none;">0</h2>
+                    <span class="small text-muted fw-semibold">Admitted</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Queue Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="h5 fw-bold mb-0" style="border:none;"><i class="fas fa-list-ol text-primary me-2"></i>My PHC Patient Queue</h4>
+                    <a href="{{ url_for('patients') }}" class="btn btn-outline-primary btn-sm fw-bold">View All</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Health ID</th>
+                                <th>Patient Name</th>
+                                <th>Village</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-DBC945</span></td>
+                                <td class="fw-bold">Kishan Kapoor</td>
+                                <td>Lakhimpur</td>
+                                <td class="text-end">
+                                    <a href="{{ url_for('patient_detail', patient_id='GC-26-DBC945') }}" class="btn btn-primary btn-sm px-3">Open</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-825119</span></td>
+                                <td class="fw-bold">Amitesh Rai</td>
+                                <td>Lakhimpur</td>
+                                <td class="text-end">
+                                    <a href="{{ url_for('patient_detail', patient_id='GC-26-825119') }}" class="btn btn-primary btn-sm px-3">Open</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-A1B2C3</span></td>
+                                <td class="fw-bold">Sita Devi</td>
+                                <td>Rampur</td>
+                                <td class="text-end">
+                                    <a href="{{ url_for('patient_detail', patient_id='GC-26-A1B2C3') }}" class="btn btn-primary btn-sm px-3">Open</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
