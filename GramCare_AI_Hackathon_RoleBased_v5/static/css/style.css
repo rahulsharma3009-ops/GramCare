@@ -1,175 +1,113 @@
-/* Official Indian Government Color Palette */
+/* Official UP-Gov Inspired Palette */
 :root {
-    --gov-saffron: #FF9933;
-    --gov-white: #FFFFFF;
-    --gov-green: #138808;
-    --gov-navy: #000080;
-    --gov-blue: #0A58CA;
-    --gov-gold: #FFC107;
-    --gov-light-bg: #F4F6F9;
-    --gov-red: #D9534F;
+    --up-gov-bg: #F5F1EA;          /* Light warm background like sample image */
+    --up-gov-header: #2F3E35;      /* Dark slate green top bar */
+    --up-gov-accent: #E05A47;      /* Saffron/Orange accent line */
+    --up-gov-navy: #1C2D42;        /* Deep Navy text */
+    --up-gov-card-bg: #FFFFFF;     /* Pure white cards */
+    --up-gov-helpline-orange: #F37023;
 }
 
 body {
-    background-color: var(--gov-light-bg) !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #212529;
+    background-color: var(--up-gov-bg) !important;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #2D3748;
 }
 
-/* --- TRICOLOR HEADER STRIP --- */
-.tricolor-strip {
-    display: flex;
-    height: 6px;
-    width: 100%;
+/* Light & Clean Container Spacing */
+main.container, main.container-fluid {
+    max-width: 1240px;
+    padding-top: 2rem !important;
+    padding-bottom: 3rem !important;
 }
-.tricolor-strip .saffron-band { background-color: var(--gov-saffron); flex: 1; }
-.tricolor-strip .white-band { background-color: var(--gov-white); flex: 1; }
-.tricolor-strip .green-band { background-color: var(--gov-green); flex: 1; }
 
+/* Top Dark Slate Nav Bar (Matches sample website header) */
 .gov-top-bar {
-    background-color: #111111;
+    background-color: #1E2521 !important;
     font-size: 0.85rem;
 }
 
-.text-navy { color: var(--gov-navy) !important; }
-.bg-gov-navy { background-color: var(--gov-navy) !important; }
-.bg-gov-green { background-color: var(--gov-green) !important; }
-.bg-saffron { background-color: var(--gov-saffron) !important; }
-
-.ashoka-text {
-    font-size: 0.65rem;
-    font-weight: bold;
-    color: #444;
-    letter-spacing: 0.5px;
+.bg-gov-slate {
+    background-color: var(--up-gov-header) !important;
 }
 
-/* --- AUTOMATIC GLOBAL STYLING FOR ALL UNSTYLED PAGES --- */
-
-/* Main Container Layout Spacing */
-main.container-fluid, main.container, main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem !important;
+/* Heading with Accent Underline like UP.gov.in */
+h1, h2, h3, .heading-underlined {
+    color: var(--up-gov-navy);
+    font-weight: 800;
+    position: relative;
+    padding-bottom: 8px;
+    margin-bottom: 1.5rem;
 }
 
-/* Headings Across All Pages */
-h1, h2, h3 {
-    color: var(--gov-navy);
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid var(--gov-saffron);
+h1::after, h2::after, h3::after, .heading-underlined::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--up-gov-accent);
+    border-radius: 2px;
 }
 
-h4, h5, h6 {
-    color: #333;
-    font-weight: 600;
+/* Clean White Card Styling like UP Portal */
+.card, .gov-card {
+    background-color: var(--up-gov-card-bg) !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s ease-in-out;
 }
 
-/* Automatic Government-style Tables Across All Pages */
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Helpline Badges (Right side like sample image) */
+.helpline-box-orange {
+    background: #FFF5EF;
+    border: 1px solid #FCD3C1;
+    border-radius: 10px;
+    padding: 12px 18px;
+}
+.helpline-box-blue {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 10px;
+    padding: 12px 18px;
+}
+
+/* De-congested Table Design */
 table {
     width: 100% !important;
-    margin: 1.5rem 0 !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    background-color: #ffffff !important;
+    background: #FFFFFF !important;
     border-radius: 8px !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
-    border: 1px solid #dee2e6 !important;
+    border-collapse: collapse !important;
+    margin-top: 1rem !important;
+    border: 1px solid #E2E8F0 !important;
 }
 
 table th {
-    background-color: var(--gov-navy) !important;
-    color: #ffffff !important;
-    padding: 12px 16px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    font-size: 0.85rem !important;
-    letter-spacing: 0.5px !important;
+    background-color: var(--up-gov-header) !important;
+    color: #FFFFFF !important;
+    padding: 14px 18px !important;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 table td {
-    padding: 12px 16px !important;
-    border-bottom: 1px solid #e9ecef !important;
-    vertical-align: middle !important;
-}
-
-table tr:nth-child(even) {
-    background-color: #f8f9fa !important;
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #F1F5F9 !important;
 }
 
 table tr:hover {
-    background-color: #eef4ff !important;
+    background-color: #F8FAFC !important;
 }
 
-/* Automatic Button Styling Across All Pages */
-button, .btn, input[type="submit"], input[type="button"] {
-    background-color: var(--gov-navy);
-    color: #ffffff;
-    border: none;
-    padding: 8px 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-block;
-    text-decoration: none;
-}
-
-button:hover, .btn:hover, input[type="submit"]:hover {
-    background-color: var(--gov-blue);
-    color: #ffffff;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Automatic Form Control Inputs Across All Pages */
-form {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-top: 4px solid var(--gov-saffron);
-    margin-bottom: 2rem;
-}
-
-input[type="text"], input[type="email"], input[type="password"], 
-input[type="number"], input[type="date"], select, textarea {
-    width: 100%;
-    padding: 10px 14px;
-    margin: 8px 0 16px 0;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 0.95rem;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--gov-navy);
-    box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.15);
-}
-
-/* Links Across All Pages */
-a {
-    color: var(--gov-blue);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--gov-navy);
-    text-decoration: underline;
-}
-
-/* Custom Card Layouts */
-.card {
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
-}
-
-/* Hide Google Translate Toolbar Top Banner */
-.goog-te-banner-frame.skiptranslate { display: none !important; }
+/* Translation Widget Fix */
+.goog-te-banner-frame { display: none !important; }
 body { top: 0px !important; }
-.goog-te-gadget-icon { display: none !important; }
