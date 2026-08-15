@@ -4,84 +4,96 @@
 
 {% block content %}
 <div class="row g-4">
-    <!-- Left Sidebar Profile & Notices -->
+    <!-- Left Profile Card & Official Notices -->
     <div class="col-lg-4 col-md-5">
-        <div class="card border-0 shadow-sm text-center">
-            <div class="card-body">
-                <div class="mb-3">
-                    <i class="fas fa-user-md fa-4x text-success bg-light p-3 rounded-circle border"></i>
+        <div class="card border-0 shadow-sm text-center mb-4">
+            <div class="card-body p-4">
+                <div class="position-relative d-inline-block mb-3">
+                    <div class="bg-success bg-opacity-10 p-4 rounded-circle border border-success border-opacity-25">
+                        <i class="fas fa-user-md fa-3x text-success"></i>
+                    </div>
+                    <span class="position-absolute bottom-0 end-0 bg-success p-2 rounded-circle border border-2 border-white" title="Online"></span>
                 </div>
                 <h4 class="fw-bold mb-1 text-dark">{{ session.get('user_name', 'Dr. Asha Verma') }}</h4>
-                <p class="text-muted small mb-2"><i class="fas fa-id-badge me-1"></i> Medical Officer &bull; PHC-RAMPUR</p>
-                <span class="badge bg-success px-3 py-2"><i class="fas fa-check-circle me-1"></i> Active Duty</span>
-                
-                <hr class="my-3">
-
-                <a href="{{ url_for('patients') if 'patients' in numpy_or_endpoints else '/patients' }}" class="btn btn-warning text-dark fw-bold w-100 py-2 shadow-sm">
-                    <i class="fas fa-user-plus me-2"></i> View / Register Patients
-                </a>
+                <p class="text-muted small mb-3"><i class="fas fa-id-badge me-1 text-primary"></i> Medical Officer &bull; PHC Rampur</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <span class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill"><i class="fas fa-check-circle me-1"></i> Active Duty</span>
+                    <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 rounded-pill"><i class="fas fa-stethoscope me-1"></i> Tele-OPD</span>
+                </div>
             </div>
         </div>
 
-        <!-- Official Notice Box -->
+        <!-- Official Urgent Notice Box -->
         <div class="card border-0 shadow-sm border-start border-4 border-warning">
-            <div class="card-body">
-                <h5 class="fw-bold text-dark mb-2"><i class="fas fa-bullhorn text-warning me-2"></i>CMO Announcement</h5>
-                <h6 class="fw-bold text-primary mb-1">Free Polio Vaccination Drive</h6>
-                <p class="small text-muted mb-2">Notice for all Rampur PHC staff regarding vaccine collection from CMO office for the upcoming drive on 18/08/2026.</p>
-                <span class="badge bg-danger">Urgent</span>
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h6 class="fw-bold text-dark mb-0"><i class="fas fa-bullhorn text-warning me-2"></i>CMO Notice</h6>
+                    <span class="badge bg-danger">Urgent</span>
+                </div>
+                <h6 class="fw-bold text-primary mb-1">Polio Immunization Drive 2026</h6>
+                <p class="small text-muted mb-0">Vaccine cold-chain verification required at Rampur PHC before 09:00 AM tomorrow.</p>
             </div>
         </div>
     </div>
 
-    <!-- Main Dashboard Area -->
+    <!-- Right Main Dashboard Column -->
     <div class="col-lg-8 col-md-7">
+        <!-- Interactive Header Banner -->
         <div class="card border-0 shadow-sm mb-4 bg-white">
-            <div class="card-body">
-                <span class="badge bg-secondary mb-2">PRIMARY HEALTH CENTRE</span>
-                <h2 class="h3 fw-bold mb-1">Rampur Primary Health Centre</h2>
-                <p class="text-muted small mb-0">District Healthcare & Telemedicine Center</p>
+            <div class="card-body p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <span class="badge bg-primary bg-opacity-10 text-primary fw-bold mb-2 px-3 py-1">DISTRICT HEALTH CENTER</span>
+                    <h3 class="fw-bold text-dark mb-1">Rampur Primary Health Centre</h3>
+                    <p class="text-muted small mb-0"><i class="fas fa-map-marker-alt text-danger me-1"></i> Sector 4, Lakhimpur Zone</p>
+                </div>
+                <a href="/patients" class="btn btn-gov-warning shadow-sm">
+                    <i class="fas fa-user-plus me-1"></i> Register Patient
+                </a>
             </div>
         </div>
 
-        <!-- Metric Stat Cards -->
+        <!-- Responsive Metric Counter Cards -->
         <div class="row g-3 mb-4">
             <div class="col-6 col-sm-3">
-                <div class="card border-0 text-center shadow-sm py-2 bg-white">
-                    <h2 class="fw-bold text-primary mb-0">3</h2>
-                    <span class="small text-muted fw-semibold">PHC Patients</span>
+                <div class="stat-card stat-card-blue">
+                    <span class="small text-muted fw-bold text-uppercase d-block mb-1" style="font-size: 0.75rem;">Total PHC</span>
+                    <h2 class="fw-extrabold text-dark mb-0">3</h2>
+                    <span class="small text-success fw-semibold"><i class="fas fa-arrow-up me-1"></i>Active</span>
                 </div>
             </div>
             <div class="col-6 col-sm-3">
-                <div class="card border-0 text-center shadow-sm py-2 bg-white">
-                    <h2 class="fw-bold text-success mb-0">2</h2>
-                    <span class="small text-muted fw-semibold">Today's Visits</span>
+                <div class="stat-card stat-card-green">
+                    <span class="small text-muted fw-bold text-uppercase d-block mb-1" style="font-size: 0.75rem;">Today's Visits</span>
+                    <h2 class="fw-extrabold text-dark mb-0">2</h2>
+                    <span class="small text-primary fw-semibold"><i class="fas fa-clock me-1"></i>Queue</span>
                 </div>
             </div>
             <div class="col-6 col-sm-3">
-                <div class="card border-0 text-center shadow-sm py-2 bg-white">
-                    <h2 class="fw-bold text-warning mb-0">2</h2>
-                    <span class="small text-muted fw-semibold">Referrals</span>
+                <div class="stat-card stat-card-amber">
+                    <span class="small text-muted fw-bold text-uppercase d-block mb-1" style="font-size: 0.75rem;">Referrals</span>
+                    <h2 class="fw-extrabold text-dark mb-0">2</h2>
+                    <span class="small text-warning fw-semibold"><i class="fas fa-ambulance me-1"></i>Pending</span>
                 </div>
             </div>
             <div class="col-6 col-sm-3">
-                <div class="card border-0 text-center shadow-sm py-2 bg-white">
-                    <h2 class="fw-bold text-danger mb-0">0</h2>
-                    <span class="small text-muted fw-semibold">Admitted</span>
+                <div class="stat-card stat-card-red">
+                    <span class="small text-muted fw-bold text-uppercase d-block mb-1" style="font-size: 0.75rem;">Admitted</span>
+                    <h2 class="fw-extrabold text-dark mb-0">0</h2>
+                    <span class="small text-muted fw-semibold">Normal</span>
                 </div>
             </div>
         </div>
 
-        <!-- Queue Table -->
+        <!-- De-congested Patient Queue Table -->
         <div class="card border-0 shadow-sm">
-            <div class="card-body p-3">
+            <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="h5 fw-bold mb-0"><i class="fas fa-list-ol text-primary me-2"></i>My PHC Patient Queue</h4>
-                    <a href="/patients" class="btn btn-outline-primary btn-sm fw-bold">View All</a>
+                    <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-users-line text-primary me-2"></i>Patient Consultation Queue</h5>
+                    <a href="/patients" class="btn btn-sm btn-outline-primary fw-bold">View Directory</a>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table align-middle mb-0">
+                <div class="table-container">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
                                 <th>Health ID</th>
@@ -92,27 +104,27 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-DBC945</span></td>
-                                <td class="fw-bold">Kishan Kapoor</td>
-                                <td>Lakhimpur</td>
+                                <td><span class="badge bg-light text-dark border font-monospace px-2 py-1">GC-26-DBC945</span></td>
+                                <td class="fw-bold text-dark">Kishan Kapoor</td>
+                                <td><span class="badge bg-secondary-subtle text-secondary">Lakhimpur</span></td>
                                 <td class="text-end">
-                                    <a href="/patients" class="btn btn-primary btn-sm px-3">Open</a>
+                                    <a href="/patients" class="btn btn-sm btn-gov-primary"><i class="fas fa-folder-open me-1"></i> Open File</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-825119</span></td>
-                                <td class="fw-bold">Amitesh Rai</td>
-                                <td>Lakhimpur</td>
+                                <td><span class="badge bg-light text-dark border font-monospace px-2 py-1">GC-26-825119</span></td>
+                                <td class="fw-bold text-dark">Amitesh Rai</td>
+                                <td><span class="badge bg-secondary-subtle text-secondary">Lakhimpur</span></td>
                                 <td class="text-end">
-                                    <a href="/patients" class="btn btn-primary btn-sm px-3">Open</a>
+                                    <a href="/patients" class="btn btn-sm btn-gov-primary"><i class="fas fa-folder-open me-1"></i> Open File</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td><span class="badge bg-light text-dark border font-monospace">GC-26-A1B2C3</span></td>
-                                <td class="fw-bold">Sita Devi</td>
-                                <td>Rampur</td>
+                                <td><span class="badge bg-light text-dark border font-monospace px-2 py-1">GC-26-A1B2C3</span></td>
+                                <td class="fw-bold text-dark">Sita Devi</td>
+                                <td><span class="badge bg-secondary-subtle text-secondary">Rampur</span></td>
                                 <td class="text-end">
-                                    <a href="/patients" class="btn btn-primary btn-sm px-3">Open</a>
+                                    <a href="/patients" class="btn btn-sm btn-gov-primary"><i class="fas fa-folder-open me-1"></i> Open File</a>
                                 </td>
                             </tr>
                         </tbody>
