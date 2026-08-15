@@ -3,81 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}GramCare - National Rural Health Portal{% endblock %}</title>
+    <title>{% block title %}GramCare - National Rural Health Mission{% endblock %}</title>
     
-    <!-- Bootstrap 5 & FontAwesome -->
+    <!-- Bootstrap 5, FontAwesome & Custom CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Top Govt Bar + Translation -->
-    <div class="gov-top-bar text-white py-1 px-4 d-flex justify-content-between align-items-center">
-        <div class="small fw-bold text-warning">
-            <i class="fas fa-flag me-1"></i> भारत सरकार | Govt of India
+    <!-- Official Top Bar -->
+    <div class="gov-top-bar text-white py-1 px-4 d-flex justify-content-between align-items-center flex-wrap">
+        <div class="d-flex align-items-center gap-3">
+            <span class="fw-bold text-warning"><i class="fas fa-flag me-1"></i> भारत सरकार | Govt of India</span>
+            <span class="d-none d-md-inline text-light opacity-75">| Ministry of Health & Family Welfare</span>
         </div>
         <div class="d-flex align-items-center gap-2">
-            <span class="small text-light"><i class="fas fa-language me-1"></i> Language:</span>
+            <span class="small text-light me-1"><i class="fas fa-language me-1"></i> Translate:</span>
             <div id="google_translate_element"></div>
         </div>
     </div>
 
-    <!-- Official Tricolor Accent Strip -->
+    <!-- Flag Tricolor Accent Bar -->
     <div class="tricolor-strip">
-        <div style="background-color: #FF9933; flex: 1;"></div>
-        <div style="background-color: #FFFFFF; flex: 1;"></div>
-        <div style="background-color: #138808; flex: 1;"></div>
+        <div></div><div></div><div></div>
     </div>
 
-    <!-- Main Govt Header -->
-    <header class="bg-white py-3 px-4 border-bottom shadow-sm">
+    <!-- Main Header -->
+    <header class="main-header py-3 px-4">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3">
-                <div class="text-center">
+                <div class="text-center border-end pe-3">
                     <i class="fas fa-landmark text-success fa-2x"></i>
-                    <div style="font-size: 0.65rem; font-weight: bold; color: #555;">सत्यमेव जयते</div>
+                    <div style="font-size: 0.6rem; font-weight: 800; color: #475569;" class="mt-1">सत्यमेव जयते</div>
                 </div>
                 <div>
-                    <h1 class="h3 mb-0 fw-bold text-dark border-0 pb-0">ग्रामकेयर / GramCare Portal</h1>
-                    <p class="mb-0 text-muted small">National Digital Health Mission for Rural Healthcare</p>
+                    <h1 class="h3 brand-title mb-0 border-0 pb-0">GRAMCARE PORTAL</h1>
+                    <p class="mb-0 text-muted small fw-semibold"><i class="fas fa-shield-alt text-primary me-1"></i> National Digital Health Mission for Rural India</p>
                 </div>
             </div>
             
-            <div class="d-none d-md-flex gap-3">
-                <div class="border rounded px-3 py-1 bg-light text-center">
-                    <span class="small text-muted d-block">Health Helpline</span>
-                    <strong class="text-danger"><i class="fas fa-phone-alt me-1"></i>1076 / 112</strong>
+            <div class="d-none d-md-flex align-items-center gap-3">
+                <div class="helpline-badge d-flex align-items-center gap-3">
+                    <i class="fas fa-phone-volume fa-2x text-danger"></i>
+                    <div>
+                        <div class="small fw-bold text-muted text-uppercase" style="font-size: 0.7rem;">Medical Support</div>
+                        <strong class="text-dark h6 mb-0">1076 / 112</strong>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Context-Aware Navbar -->
+    <!-- Interactive Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-gov-slate sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-warning" href="{{ url_for('index') }}">
-                <i class="fas fa-home me-1"></i> GramCare
+            <a class="navbar-brand fw-bold text-warning d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <i class="fas fa-hospital-user"></i> GramCare
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#govNavbar">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#govNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="govNavbar">
                 <ul class="navbar-nav me-auto">
                     {% block nav_links %}
-                    <!-- Individual pages can insert their role-specific links here -->
+                    {% if session.get('user_id') or session.get('role') %}
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('care_hub') }}"><i class="fas fa-th-large me-1 text-info"></i> Care Hub</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('patients') }}"><i class="fas fa-user-injured me-1 text-warning"></i> Patients</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('consultations') }}"><i class="fas fa-user-md me-1 text-danger"></i> Consultations</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('facilities') }}"><i class="fas fa-clinic-medical me-1 text-success"></i> Health Centers</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('emergency') }}"><i class="fas fa-ambulance me-1 text-warning"></i> Emergency</a></li>
+                    {% endif %}
                     {% endblock %}
                 </ul>
 
                 <div class="d-flex align-items-center gap-2">
                     {% if session.get('user_id') or session.get('role') %}
-                        <span class="navbar-text text-warning me-2 fw-bold">
-                            <i class="fas fa-user-circle me-1"></i> {{ session.get('user_name', 'User') }}
-                        </span>
-                        <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm fw-bold">Logout</a>
+                        <div class="px-3 py-1 bg-white bg-opacity-10 rounded-3 text-warning fw-bold small me-2 border border-white border-opacity-10">
+                            <i class="fas fa-user-circle me-1"></i> {{ session.get('user_name', 'Authorized User') }}
+                        </div>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm fw-bold text-white px-3"><i class="fas fa-power-off me-1"></i> Logout</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-warning text-dark btn-sm fw-bold"><i class="fas fa-lock me-1"></i> Staff Login</a>
+                        <a href="{{ url_for('login') }}" class="btn btn-gov-warning btn-sm"><i class="fas fa-lock me-1"></i> Official Login</a>
                         <a href="{{ url_for('patient_login') }}" class="btn btn-outline-light btn-sm fw-bold"><i class="fas fa-id-card me-1"></i> ABHA Portal</a>
                     {% endif %}
                 </div>
@@ -85,12 +93,12 @@
         </div>
     </nav>
 
-    <!-- Content Area -->
+    <!-- Dynamic Alert Container -->
     <main class="container py-4 flex-grow-1">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show shadow-sm" role="alert">
+                    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4" role="alert">
                         <i class="fas fa-info-circle me-2"></i> {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
@@ -102,20 +110,28 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-auto bg-dark text-white py-3 border-top border-4 border-warning">
-        <div class="container text-center small text-light">
-            &copy; 2026 Government of India / GramCare Initiative. All Rights Reserved.
+    <footer class="mt-auto bg-gov-slate text-white py-4 border-top border-4 border-warning">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-2 mb-md-0">
+                    <p class="small mb-0 text-light opacity-75">&copy; 2026 Government of India / GramCare Digital Health Initiative.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <span class="badge bg-white bg-opacity-10 text-light border border-white border-opacity-10 px-3 py-2 small">
+                        <i class="fas fa-shield-virus text-success me-1"></i> ISO 27001 Certified Govt Portal
+                    </span>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Working Google Translate Engine -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'hi,en,bn,te,ta,mr,gu',
+                includedLanguages: 'hi,en,bn,te,ta,mr,gu,kn',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             }, 'google_translate_element');
         }
